@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyrcl - Connect Your World</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png" sizes="180x180">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=poppins@400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+
+
+    
+      
+    <style>
+        /* Base and Apple-Inspired Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
+            color: #F5F5F7;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            padding-top: 60px; /* Space for fixed navbar */
+            position: relative; /* Needed for absolute positioning of orbs */
+        }
+
+        /* Navigation Bar - Minimalist */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(18, 18, 18, 0.75);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.75rem 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        /* Updated nav-logo to use flex for alignment */
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+        .nav-logo img {
+            height: 80px; /* Adjust as needed */
+            width: auto;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem; /* Space between image and text */
+        }
+        .nav-logo-text {
+            font-size: 1.5rem; /* Adjust size as needed */
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+        .nav-links-desktop a {
+            color: #E0E0E0;
+            margin-left: 2rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s ease-in-out;
+        }
+        .nav-links-desktop a:hover {
+            color: #FFFFFF;
+        }
+        .mobile-menu-button {
+            display: none;
+            color: #F5F5F7;
+            background: none;
+            border: none;
+            font-size: 1.75rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: rgba(25, 25, 25, 0.9);
+            backdrop-filter: blur(10px) saturate(150%);
+            -webkit-backdrop-filter: blur(10px) saturate(150%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            z-index: 999;
+        }
+        .mobile-menu a {
+            display: block;
+            color: #E0E0E0;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.75rem 1.5rem;
+            text-align: center;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .mobile-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #FFFFFF;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: calc(100vh - 60px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 1.5rem;
+            position: relative;
+            z-index: 10; /* Ensure hero content is above background circles */
+        }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            position: relative;
+            z-index: 10;
+        }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #ffffff;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Gradient Text for Cyrcl Logo/Title */
+        .gradient-text {
+            color: #FFFFFF; /* Base white color */
+        }
+
+        /* Frosted Glass Effect - Reusable class */
+        .frosted-glass {
+            backdrop-filter: blur(20px) saturate(180%); /* Stronger blur and saturation */
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.02); /* Made slightly darker */
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border, adjusted */
+            box-shadow: 0 6px 28px 0 rgba(0, 0, 0, 0.5); /* Deeper shadow, adjusted */
+        }
+
+        /* Orbiting Circles Animation (Full viewport background) */
+        .orbit-container {
+            position: fixed; /* Fixed to viewport */
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; /* Allow clicks to pass through */
+            z-index: 0; /* Behind all content */
+        }
+
+        /* The wrapper that rotates all circles */
+        .orbit-wrapper {
+            position: relative; /* Establish positioning context for children */
+            width: 1px; /* Minimal size, acts as the central pivot */
+            height: 1px;
+            animation: rotate-wrapper 30s linear infinite; /* Formal rotation speed */
+        }
+
+        @keyframes rotate-wrapper {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .orbiting-circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border: 2px solid; /* Border for neon effect */
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Neon glow for circles */
+            pointer-events: auto; /* Make circles clickable if needed */
+            /* Initial positioning relative to the orbit-wrapper's center */
+            top: 0;
+            left: 0;
+            /* transform will be set by nth-child to position and counter-rotate */
+        }
+
+        /* Updated border colors and positioning for orbiting circles */
+        .orbiting-circle:nth-child(1) {
+            width: 180px;
+            height: 180px;
+            border-color: #FF007F; /* Vibrant Pink */
+            /* Position, translate to center, and counter-rotate content */
+            transform: rotate(0deg) translateX(300px) rotate(0deg) translate(-50%, -50%);
+        }
+        .orbiting-circle:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            border-color: #FF8C00; /* Dark Orange */
+            transform: rotate(72deg) translateX(250px) rotate(-72deg) translate(-50%, -50%);
+        }
+        .orbiting-circle:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            border-color: #00BFFF; /* Deep Sky Blue */
+            transform: rotate(144deg) translateX(350px) rotate(-144deg) translate(-50%, -50%);
+        }
+        .orbiting-circle:nth-child(4) {
+            width: 160px;
+            height: 160px;
+            border-color: #8A2BE2; /* Blue Violet */
+            transform: rotate(216deg) translateX(280px) rotate(-216deg) translate(-50%, -50%);
+        }
+        .orbiting-circle:nth-child(5) {
+            width: 170px;
+            height: 170px;
+            border-color: #FF1493; /* Deep Pink */
+            transform: rotate(288deg) translateX(320px) rotate(-288deg) translate(-50%, -50%);
+        }
+
+        #introVideo {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+        /* Content inside circles (simulated video/animation) - Static gradients for minimalism */
+        .circle-content {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #FF007F, #FF8C00); /* Pink to Orange */
+        }
+
+        .circle-content.c2 { background: linear-gradient(45deg, #FF8C00, #00BFFF); } /* Orange to Blue */
+        .circle-content.c3 { background: linear-gradient(45deg, #00BFFF, #8A2BE2); } /* Blue to Purple */
+        .circle-content.c4 { background: linear-gradient(45deg, #8A2BE2, #FF1493); } /* Purple to Deep Pink */
+        .circle-content.c5 { background: linear-gradient(45deg, #FF1493, #FF007F); } /* Deep Pink to Vibrant Pink */
+
+
+        .content-section {
+            padding: 4rem 1.5rem;
+            max-width: 1024px;
+            margin: 0 auto;
+            position: relative; 
+            z-index: 5; /* Ensure content is above background orbs */
+        }
+        .section-heading {
+            font-size: 2.25rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            text-align: center;
+            margin-bottom: 1rem;
+            position: relative; 
+            z-index: 5;
+        }
+        .section-subheading {
+            font-size: 1.125rem;
+            color: #ffffff;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            line-height: 1.6;
+            position: relative; 
+            z-index: 5;
+        }
+
+        /* Background Orbs for Sign Up Section (Kept for local section background) */
+        .background-orbs-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 50px; 
+            box-sizing: border-box; 
+            overflow: visible; 
+            z-index: 1; 
+            pointer-events: none;
+        }
+        .glowing-orb {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0; 
+            filter: blur(50px); 
+            animation: pulse-glow 12s ease-in-out infinite alternate,
+                        drift-orb 40s linear infinite alternate;
+        }
+        .glowing-orb.orb1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s, 0s; }
+        .glowing-orb.orb2 { width: 400px; height: 400px; top: 60%; left: 70%; animation-delay: -4s, -10s; }
+        .glowing-orb.orb3 { width: 250px; height: 250px; top: 30%; left: 40%; animation-delay: -8s, -20s; }
+        .glowing-orb.orb4 { width: 350px; height: 350px; top: 5%; left: 80%; animation-delay: -2s, -5s; }
+        .glowing-orb.orb5 { width: 280px; height: 280px; bottom: 0%; left: 0%; animation-delay: -6s, -15s; }
+
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.1; transform: scale(0.9); }
+            50% { opacity: 0.35; transform: scale(1.05); }
+        }
+        @keyframes drift-orb {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(20px, -30px) rotate(45deg); }
+            50% { transform: translate(-10px, 40px) rotate(90deg); }
+            75% { transform: translate(-30px, -20px) rotate(135deg); }
+            100% { transform: translate(0px, 0px) rotate(180deg); }
+        }
+
+
+        /* Sign Up Form Styling - Enhanced Translucent Glassy Effect */
+        .signup-form-container {
+            /* Applying frosted-glass class properties */
+            padding: 3rem;
+            border-radius: 40px; /* Increased border-radius for more rounded corners */
+            max-width: 520px; 
+            margin: 0 auto;
+            position: relative; 
+            z-index: 10; /* Ensure form is above background orbs */
+        }
+
+        .signup-form-container label {
+            display: block;
+            color: #E0E0E5; 
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .signup-form-container input {
+            width: 100%;
+            padding: 0.85rem 1.1rem;
+            background-color: rgba(255, 255, 255, 0.1); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            border-radius: 25px; /* Further increased border-radius for more rounded corners */
+            color: #F5F5F7;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        /* Input focus glow - Adjusted to a more general neon blue/cyan */
+        .signup-form-container input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 200, 255, 0.5), 0 0 10px rgba(0, 200, 255, 0.5); /* Neon Blue glow */
+            border-color: #00C8FF;
+        }
+
+        /* Login Button - More minimalistic with subtle glow and more rounded edges */
+        .btn-gradient {
+            background-color: rgba(255, 255, 255, 0.05); /* Very subtle transparent white */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Blackish glow */
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+            color: #FFFFFF; 
+            font-weight: bold;
+            font-size: 1.125rem; 
+            padding: 0.75rem 1.5rem; 
+            border-radius: 9999px; /* Pill-shaped rounded edges */
+            cursor: pointer;
+        }
+
+        .btn-gradient:hover {
+            background-color: rgba(255, 255, 255, 0.15); 
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8); 
+            transform: scale(1.02); 
+        }
+        .btn-gradient:focus {
+            outline: none;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8); 
+        }
+
+        /* Specific styles for the Hero "Get Started" button for an even brighter glow */
+        .btn-hero-glow {
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.6); 
+        }
+
+        .btn-hero-glow:hover {
+            box-shadow: 0 0 45px rgba(0, 0, 0, 1); 
+        }
+        .btn-hero-glow:focus {
+            box-shadow: 0 0 45px rgba(0, 0, 0, 1); 
+        }
+
+
+        .signup-form-footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #A0A0A5;
+        }
+        .signup-form-footer a {
+            color: #00AFFF; 
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .signup-form-footer a:hover {
+            text-decoration: underline;
+        }
+
+
+        .footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.875rem;
+            color: #A0A0A5;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+            position: relative; 
+            z-index: 5;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body { padding-top: 56px; }
+            .navbar { padding: 0.5rem 0; }
+            .nav-container { padding: 0 1rem; }
+            .nav-logo img { height: 24px; } /* Adjust for mobile */
+            .nav-logo-text { font-size: 1.25rem; } /* Adjust for mobile */
+            .nav-links-desktop { display: none; }
+            .mobile-menu-button { display: block; }
+
+            .hero-title { font-size: 2.25rem; }
+            .hero-subtitle { font-size: 1rem; }
+            /* Ensure responsive button padding is appropriate for pill shape */
+            .btn-gradient { padding: 0.7rem 1.75rem; font-size: 0.9rem; }
+
+
+            .content-section { padding: 3rem 1rem; }
+            .section-heading { font-size: 1.75rem; }
+            .section-subheading { font-size: 1rem; }
+
+            .signup-form-container { padding: 2rem; max-width: 90%;}
+            /* Adjust orbiting circles for smaller screens */
+            .orbiting-circle:nth-child(1) { transform: rotate(0deg) translateX(150px) rotate(0deg) translate(-50%, -50%); width: 120px; height: 120px; }
+            .orbiting-circle:nth-child(2) { transform: rotate(72deg) translateX(120px) rotate(-72deg) translate(-50%, -50%); width: 100px; height: 100px; }
+            .orbiting-circle:nth-child(3) { transform: rotate(144deg) translateX(180px) rotate(-144deg) translate(-50%, -50%); width: 140px; height: 140px; }
+            .orbiting-circle:nth-child(4) { transform: rotate(216deg) translateX(130px) rotate(-216deg) translate(-50%, -50%); width: 110px; height: 110px; }
+            .orbiting-circle:nth-child(5) { transform: rotate(288deg) translateX(160px) rotate(-288deg) translate(-50%, -50%); width: 130px; height: 130px; }
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+
+    <div id="intro" style="position: fixed; inset: 0; background: black; z-index: 9999; display: flex; align-items: center; justify-content: center;">
+        <video id="introVideo" src="particle.mp4" autoplay muted playsinline></video>
+      </div>
+
+
+      <div id="mainContent" style="opacity: 0;">
+    <div class="orbit-container">
+        <div class="orbit-wrapper">
+            
+            <div class="orbiting-circle">
+                <div class="circle-content"></div>
+            </div>
+            <div class="orbiting-circle">
+                <div class="circle-content c2"></div>
+            </div>
+            <div class="orbiting-circle">
+                <div class="circle-content c3"></div>
+            </div>
+            <div class="orbiting-circle">
+                <div class="circle-content c4"></div>
+            </div>
+            <div class="orbiting-circle">
+                <div class="circle-content c5"></div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <!-- Replaced placeholder with uploaded image and added a span for the text -->
+                <img src="cyrcllogo.png" alt="Cyrcl Logo Icon" onerror="this.onerror=null; this.src='https://placehold.co/40x40/000000/FFFFFF?text=Error&font=inter'; this.style.backgroundColor='#333';">
+                <span class="nav-logo-text">Cyrcl</span>
+            </div>
+            <div class="nav-links-desktop hidden md:flex">
+                <a href="#">Features</a>
+                <a href="#signup">Sign Up</a>
+            </div>
+            <button class="mobile-menu-button md:hidden">
+                &#9776;
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#">Features</a>
+            <a href="#signup">Sign Up</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero-section">
+            <h1 class="hero-title gradient-text">Connect. Create. Cyrcl.</h1>
+            <p class="hero-subtitle">The future of social interaction is here. Join Cyrcl and discover a new way to connect with your world.</p>
+            <div class="hero-cta">
+                <button class="btn-gradient btn-hero-glow" onclick="document.getElementById('signup').scrollIntoView();">Get Started</button>
+            </div>
+        </section>
+
+        <section id="signup" class="content-section">
+            <div class="background-orbs-container" id="signupOrbsContainer">
+                </div>
+            <h2 class="section-heading">Create Your Account</h2>
+            <p class="section-subheading">Join the Cyrcl community and start connecting today.</p>
+            <div class="signup-form-container frosted-glass">
+                <form class="space-y-4" onsubmit="event.preventDefault(); console.log('Sign Up attempt');">
+                    <div>
+                        <label for="signupFullName">Full Name</label>
+                        <input type="text" id="signupFullName" name="signupFullName" placeholder="Your Full Name" required>
+                    </div>
+                    <div>
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" name="signupEmail" placeholder="you@example.com" required>
+                    </div>
+                    <div>
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="signupPassword" placeholder="Create a strong password" required>
+                    </div>
+                    <div>
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                    <div class="flex justify-center">
+                        <button type="submit" class="btn-gradient">Create Account</button>
+                    </div>
+                    <div class="signup-form-footer">
+                        <p>Already have an account? <a href="#">Log In</a></p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; <span id="currentYear"></span> Cyrcl. All rights reserved. </p>
+        <p>Redefining Connection.</p>
+    </footer>
+
+</div>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle Functionality
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                const isMenuOpen = mobileMenu.style.display === 'block';
+                mobileMenu.style.display = isMenuOpen ? 'none' : 'block';
+            });
+
+            // Close menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.style.display = 'none';
+                });
+            });
+        } else {
+            console.error("Mobile menu button or menu element not found.");
+        }
+
+        // Setup for Background Glowing Orbs in Sign Up Section
+        const signupOrbsContainer = document.getElementById('signupOrbsContainer');
+        const numSignupOrbs = 5; 
+
+        function setupSignupOrbs() {
+            if (!signupOrbsContainer) {
+                console.error("Signup orbs container not found.");
+                return;
+            }
+            signupOrbsContainer.innerHTML = ''; 
+            const vibrantGradients = [
+                'linear-gradient(45deg, #FF00FF, #FF7F00)', 
+                'linear-gradient(45deg, #00FFFF, #7F00FF)', 
+                'linear-gradient(45deg, #FFFF00, #FF007F)', 
+                'linear-gradient(45deg, #7F00FF, #FF00FF)', 
+                'linear-gradient(45deg, #FF7F00, #FF007F)'  
+            ];
+
+            for (let i = 0; i < numSignupOrbs; i++) {
+                const orb = document.createElement('div');
+                orb.classList.add('glowing-orb');
+                orb.classList.add(`orb${i + 1}`); 
+                orb.style.backgroundImage = vibrantGradients[i % vibrantGradients.length];
+                signupOrbsContainer.appendChild(orb);
+            }
+        }
+        
+        setupSignupOrbs();
+
+    </script>
+
+
+
+<script>
+    gsap.from(".hero-title", { 
+      duration: 1.2, 
+      y: -50, 
+      opacity: 0, 
+      ease: "power4.out" 
+    });
+  
+    gsap.from(".hero-subtitle", { 
+      duration: 1.2, 
+      delay: 0.3,
+      y: 30, 
+      opacity: 0, 
+      ease: "power2.out" 
+    });
+  
+    gsap.from(".btn-hero-glow", { 
+      duration: 1.2, 
+      delay: 0.6, 
+      scale: 0.8, 
+      opacity: 0, 
+      ease: "back.out(1.7)" 
+    });
+
+
+    gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".signup-form-container", {
+    scrollTrigger: {
+      trigger: ".signup-form-container",
+      start: "top 80%",
+      toggleActions: "play none none none"
+    },
+    duration: 1.2,
+    y: 60,
+    opacity: 0,
+    ease: "power3.out"
+  });
+
+  const wrappers = document.querySelectorAll('.circle-wrapper');
+
+window.addEventListener('mousemove', (e) => {
+  wrappers.forEach(wrapper => {
+    const rect = wrapper.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const dx = e.clientX - centerX;
+    const dy = e.clientY - centerY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    const maxDistance = 120;
+    const repulsionStrength = 15;
+
+    if (distance < maxDistance) {
+      const angle = Math.atan2(dy, dx);
+      const force = (1 - distance / maxDistance) * repulsionStrength;
+      const offsetX = -Math.cos(angle) * force;
+      const offsetY = -Math.sin(angle) * force;
+
+      gsap.to(wrapper, {
+        x: offsetX,
+        y: offsetY,
+        duration: 0.2,
+        ease: "power2.out"
+      });
+    } else {
+      gsap.to(wrapper, {
+        x: 0,
+        y: 0,
+        duration: 0.5,
+        ease: "power3.out"
+      });
+    }
+  });
+});
+  </script>
+  <script>
+    const video = document.getElementById('introVideo');
+    const intro = document.getElementById('intro');
+    const mainContent = document.getElementById('mainContent');
+  
+    video.addEventListener('ended', () => {
+      // Fade out the intro and fade in the main content
+      intro.style.transition = 'opacity 0.8s ease';
+      mainContent.style.transition = 'opacity 1.2s ease';
+  
+      intro.style.opacity = 0;
+      mainContent.style.opacity = 1;
+  
+      setTimeout(() => {
+        intro.style.display = 'none'; // Remove from layout
+      }, 1000);
+    });
+
+
+  video.addEventListener('ended', () => {
+    gsap.to(intro, { opacity: 0, duration: 1, onComplete: () => {
+      intro.style.display = 'none';
+    }});
+
+    gsap.to(mainContent, { opacity: 1, duration: 1.2 });
+  });
+  </script>
+  
+  
+</body>
+</html>
