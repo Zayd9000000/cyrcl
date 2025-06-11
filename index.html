@@ -31,6 +31,22 @@
             position: relative; /* Needed for absolute positioning of orbs */
         }
 
+        /* Add neon grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
         #mainContent {
             overflow-x: hidden;
             width: 100%;
@@ -134,8 +150,15 @@
             padding: 4rem 1.5rem;
             position: relative;
             z-index: 10;
-            margin-top: 1.5rem; /* Ensure hero content is above background circles */
+            margin-top: 1.5rem;
         }
+
+        .hero-cta {
+            position: relative;
+            z-index: 20;
+            margin-top: 2rem;
+        }
+
         .hero-title {
             font-size: 3rem;
             font-weight: 700;
@@ -162,13 +185,49 @@
             color: #FFFFFF; /* Base white color */
         }
 
-        /* Frosted Glass Effect - Reusable class */
+        /* Enhanced Frosted Glass Effect */
         .frosted-glass {
-            backdrop-filter: blur(20px) saturate(180%); /* Stronger blur and saturation */
+            backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            background-color: rgba(255, 255, 255, 0.02); /* Made slightly darker */
-            border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border, adjusted */
-            box-shadow: 0 6px 28px 0 rgba(0, 0, 0, 0.5); /* Deeper shadow, adjusted */
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
+            box-shadow: 0 6px 28px 0 rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .frosted-glass::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #2131E3, #955F30, #B93BD9);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: -1;
+        }
+
+        .frosted-glass:hover {
+            box-shadow: 0 8px 32px 0 rgba(185, 59, 217, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .frosted-glass:hover::before {
+            opacity: 0.08; /* Increased from 0.05 */
+        }
+
+        /* Add pulse animation for frosted glass sections */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 6px 28px 0 rgba(0, 0, 0, 0.5); }
+            50% { box-shadow: 0 8px 32px 0 rgba(185, 59, 217, 0.2); }
+            100% { box-shadow: 0 6px 28px 0 rgba(0, 0, 0, 0.5); }
+        }
+
+        .frosted-glass:hover {
+            animation: pulse-glow 2s infinite;
         }
 
         /* Orbiting Circles Animation (Full viewport background) */
@@ -219,32 +278,31 @@
         .orbiting-circle:nth-child(1) {
             width: 180px;
             height: 180px;
-            border-color: #FF007F; /* Vibrant Pink */
-            /* Position, translate to center, and counter-rotate content */
+            border-color: #2131E3;
             transform: rotate(0deg) translateX(300px) rotate(0deg) translate(-50%, -50%);
         }
         .orbiting-circle:nth-child(2) {
             width: 150px;
             height: 150px;
-            border-color: #FF8C00; /* Dark Orange */
+            border-color: #955F30;
             transform: rotate(72deg) translateX(250px) rotate(-72deg) translate(-50%, -50%);
         }
         .orbiting-circle:nth-child(3) {
             width: 200px;
             height: 200px;
-            border-color: #00BFFF; /* Deep Sky Blue */
+            border-color: #B93BD9;
             transform: rotate(144deg) translateX(350px) rotate(-144deg) translate(-50%, -50%);
         }
         .orbiting-circle:nth-child(4) {
             width: 160px;
             height: 160px;
-            border-color: #8A2BE2; /* Blue Violet */
+            border-color: #2131E3;
             transform: rotate(216deg) translateX(280px) rotate(-216deg) translate(-50%, -50%);
         }
         .orbiting-circle:nth-child(5) {
             width: 170px;
             height: 170px;
-            border-color: #FF1493; /* Deep Pink */
+            border-color: #955F30;
             transform: rotate(288deg) translateX(320px) rotate(-288deg) translate(-50%, -50%);
         }
 
@@ -254,18 +312,34 @@
 }
 
 
-        /* Content inside circles (simulated video/animation) - Static gradients for minimalism */
+        /* Content inside circles (simulated video/animation) - Updated gradients */
         .circle-content {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: linear-gradient(45deg, #FF007F, #FF8C00); /* Pink to Orange */
+            background: linear-gradient(45deg, #2131E3, #955F30, #B93BD9);
+            opacity: 0.9; /* Added opacity to make colors more visible */
         }
 
-        .circle-content.c2 { background: linear-gradient(45deg, #FF8C00, #00BFFF); } /* Orange to Blue */
-        .circle-content.c3 { background: linear-gradient(45deg, #00BFFF, #8A2BE2); } /* Blue to Purple */
-        .circle-content.c4 { background: linear-gradient(45deg, #8A2BE2, #FF1493); } /* Purple to Deep Pink */
-        .circle-content.c5 { background: linear-gradient(45deg, #FF1493, #FF007F); } /* Deep Pink to Vibrant Pink */
+        .circle-content.c2 { 
+            background: linear-gradient(45deg, #955F30, #B93BD9, #2131E3); 
+            opacity: 0.9;
+        }
+
+        .circle-content.c3 { 
+            background: linear-gradient(45deg, #B93BD9, #2131E3, #955F30); 
+            opacity: 0.9;
+        }
+
+        .circle-content.c4 { 
+            background: linear-gradient(45deg, #2131E3, #B93BD9, #955F30); 
+            opacity: 0.9;
+        }
+
+        .circle-content.c5 { 
+            background: linear-gradient(45deg, #955F30, #2131E3, #B93BD9); 
+            opacity: 0.9;
+        }
 
 
         .content-section {
@@ -311,22 +385,16 @@
         .glowing-orb {
             position: absolute;
             border-radius: 50%;
-            opacity: 0; 
-            filter: blur(50px); 
-            animation: pulse-glow 12s ease-in-out infinite alternate,
-                        drift-orb 40s linear infinite alternate;
+            opacity: 0.15; /* Increased from 0.1 */
+            filter: blur(50px);
+            animation: drift-orb 40s linear infinite alternate;
         }
-        .glowing-orb.orb1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s, 0s; }
-        .glowing-orb.orb2 { width: 400px; height: 400px; top: 60%; left: 70%; animation-delay: -4s, -10s; }
-        .glowing-orb.orb3 { width: 250px; height: 250px; top: 30%; left: 40%; animation-delay: -8s, -20s; }
-        .glowing-orb.orb4 { width: 350px; height: 350px; top: 5%; left: 80%; animation-delay: -2s, -5s; }
-        .glowing-orb.orb5 { width: 280px; height: 280px; bottom: 0%; left: 0%; animation-delay: -6s, -15s; }
+        .glowing-orb.orb1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s; }
+        .glowing-orb.orb2 { width: 400px; height: 400px; top: 60%; left: 70%; animation-delay: -10s; }
+        .glowing-orb.orb3 { width: 250px; height: 250px; top: 30%; left: 40%; animation-delay: -20s; }
+        .glowing-orb.orb4 { width: 350px; height: 350px; top: 5%; left: 80%; animation-delay: -5s; }
+        .glowing-orb.orb5 { width: 280px; height: 280px; bottom: 0%; left: 0%; animation-delay: -15s; }
 
-
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.1; transform: scale(0.9); }
-            50% { opacity: 0.35; transform: scale(1.05); }
-        }
         @keyframes drift-orb {
             0% { transform: translate(0px, 0px) rotate(0deg); }
             25% { transform: translate(20px, -30px) rotate(45deg); }
@@ -334,7 +402,6 @@
             75% { transform: translate(-30px, -20px) rotate(135deg); }
             100% { transform: translate(0px, 0px) rotate(180deg); }
         }
-
 
         /* Sign Up Form Styling - Enhanced Translucent Glassy Effect */
         .signup-form-container {
@@ -372,42 +439,65 @@
             border-color: #00C8FF;
         }
 
-        /* Login Button - More minimalistic with subtle glow and more rounded edges */
+        /* Updated Button Styles */
         .btn-gradient {
-            background-color: rgba(255, 255, 255, 0.05); /* Very subtle transparent white */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Blackish glow */
-            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-            color: #FFFFFF; 
+            background: linear-gradient(#000000, #000000) padding-box,
+                        linear-gradient(90deg, #2131E3, #955F30, #B93BD9) border-box;
+            border: 1px solid transparent;
+            box-shadow: 0 0 15px rgba(185, 59, 217, 0.2);
+            transition: all 0.3s ease-in-out;
+            color: #FFFFFF;
             font-weight: bold;
-            font-size: 1.125rem; 
-            padding: 0.75rem 1.5rem; 
-            border-radius: 9999px; /* Pill-shaped rounded edges */
+            font-size: 1.125rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: inline-block; /* Added to ensure proper button display */
+            min-width: 160px; /* Added to ensure minimum button width */
+        }
+
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #2131E3, #955F30, #B93BD9);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: -1;
+            border-radius: 9999px;
         }
 
         .btn-gradient:hover {
-            background-color: rgba(255, 255, 255, 0.15); 
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8); 
-            transform: scale(1.02); 
-        }
-        .btn-gradient:focus {
-            outline: none;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8); 
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(185, 59, 217, 0.4);
         }
 
-        /* Specific styles for the Hero "Get Started" button for an even brighter glow */
+        .btn-gradient:hover::before {
+            opacity: 0.15;
+        }
+
+        .btn-gradient:focus {
+            outline: none;
+            box-shadow: 0 0 30px rgba(185, 59, 217, 0.5);
+        }
+
+        /* Update Hero Button Glow */
         .btn-hero-glow {
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.6); 
+            box-shadow: 0 0 25px rgba(185, 59, 217, 0.3);
         }
 
         .btn-hero-glow:hover {
-            box-shadow: 0 0 45px rgba(0, 0, 0, 1); 
-        }
-        .btn-hero-glow:focus {
-            box-shadow: 0 0 45px rgba(0, 0, 0, 1); 
+            box-shadow: 0 0 45px rgba(185, 59, 217, 0.5);
         }
 
+        .btn-hero-glow:focus {
+            box-shadow: 0 0 45px rgba(185, 59, 217, 0.5);
+        }
 
         .signup-form-footer {
             text-align: center;
@@ -706,13 +796,14 @@
         .contact-link {
             text-decoration: none;
             font-weight: 500;
-            background: linear-gradient(45deg, #FF007F, #FF8C00, #00BFFF, #8A2BE2, #FF1493);
+            background: linear-gradient(45deg, #2131E3, #955F30, #B93BD9);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: 200% 200%;
             animation: gradient-shift 8s ease infinite;
             display: inline-block;
+            opacity: 0.9; /* Added opacity to make colors more visible */
         }
 
         @keyframes gradient-shift {
@@ -786,7 +877,7 @@
                 <span class="nav-logo-text">Cyrcl</span>
             </div>
             <div class="nav-links-desktop hidden md:flex">
-                <a href="#">Features</a>
+                <a href="#">About Us</a>
                 <a href="#signup">Sign Up</a>
             </div>
             <button class="mobile-menu-button md:hidden">
@@ -842,6 +933,7 @@
                     </div>
                     <div class="signup-form-footer">
                         <p>Already have an account? <br><a href="#" onclick="event.preventDefault(); toggleForms('login');">Log In</a></p>
+                        <p class="mt-4 text-sm text-gray-400">By signing up, you agree to our<br><a href="terms.html" class="text-gray-300 hover:text-white underline">Terms of Service</a> and <a href="privacy.html" class="text-gray-300 hover:text-white underline">Privacy Policy</a>.</p>
                     </div>
                 </form>
 
@@ -870,7 +962,7 @@
             <p class="welcome-message">Explore, connect, and create in ways you never imagined possible.</p>
             <div class="welcome-contact">
                 <p>Have questions or feedback? We'd love to hear from you!</p>
-                <p>Contact: <a href="mailto:info@cyrcl.life" class="contact-link">info@cyrcl.life</a></p>
+                <p>Contact: <a href="mailto:support@cyrcl.life" class="contact-link">support@cyrcl.life</a></p>
             </div>
         </div>
     </div>
@@ -879,7 +971,7 @@
 
     <footer class="footer">
         <p>&copy; <span id="currentYear"></span> Cyrcl. All rights reserved. </p>
-        <p>Contact: <a href="mailto:info@cyrcl.life" class="contact-link">info@cyrcl.life</a></p>
+        <p>Contact: <a href="mailto:support@cyrcl.life" class="contact-link">support@cyrcl.life</a></p>
     </footer>
 
 </div>
@@ -887,11 +979,15 @@
     <script>
         // Add this new function for smooth scrolling
         function scrollToSignup() {
-            const sectionHeading = document.getElementById('sectionHeading');
-            if (sectionHeading) {
-                sectionHeading.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
+            const signupSection = document.getElementById('signup');
+            if (signupSection) {
+                gsap.to(window, {
+                    duration: 1.5,
+                    scrollTo: {
+                        y: signupSection,
+                        offsetY: 0
+                    },
+                    ease: "power2.inOut"
                 });
             }
         }
@@ -1027,7 +1123,8 @@
       delay: 0.6, 
       scale: 0.8, 
       opacity: 0, 
-      ease: "back.out(1.7)" 
+      ease: "back.out(1.7)";
+      
     });
 
 
