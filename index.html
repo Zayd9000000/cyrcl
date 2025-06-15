@@ -52,6 +52,8 @@
             width: 100%;
             position: relative;
             min-height: 100vh;
+            opacity: 0;
+            transition: opacity 0.7s ease;
         }
 
         /* Navigation Bar - Minimalist */
@@ -117,9 +119,9 @@
             left: 0;
             right: 0;
             width: 100%; /* Added explicit width */
-            background-color: rgba(25, 25, 25, 0.9);
-            backdrop-filter: blur(10px) saturate(150%);
-            -webkit-backdrop-filter: blur(10px) saturate(150%);
+            background-color: rgba(18, 18, 18, 0.75);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 1rem 0;
             z-index: 999;
@@ -306,11 +308,48 @@
             transform: rotate(288deg) translateX(320px) rotate(-288deg) translate(-50%, -50%);
         }
 
-        #introVideo {
-  max-width: 100%;
-  max-height: 100%;
-}
+        #intro {
+            position: fixed;
+            inset: 0;
+            background: black;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
 
+        #introVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        @media (max-width: 768px) {
+            #intro {
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+            
+            #introVideo {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
 
         /* Content inside circles (simulated video/animation) - Updated gradients */
         .circle-content {
@@ -638,7 +677,8 @@
                 padding: 1.5rem 1rem;
                 text-align: center;
                 width: 100%;
-                min-height: auto;
+                min-height: calc(100vh - 56px); /* Adjust to center vertically below navbar */
+                margin-top: 0; /* Remove extra top margin */
             }
 
             .hero-title { 
@@ -676,7 +716,7 @@
             }
 
             .signup-form-container { 
-                padding: 1.5rem 1rem; 
+                padding: 1.5rem 1.25rem; /* Adjusted for inner margin effect */
                 width: 90%;
                 margin: 0 auto;
             }
@@ -687,13 +727,13 @@
             }
 
             .signup-form-container input {
-                padding: 0.6rem 1rem;
+                padding: 0.6rem 0.75rem; /* Reduced horizontal padding */
                 font-size: 0.9rem;
                 margin-bottom: 1rem;
             }
 
             .btn-gradient { 
-                padding: 0.6rem 1.5rem; 
+                padding: 0.6rem 1rem; /* Reduced horizontal padding */
                 font-size: 0.9rem;
                 width: 100%;
                 max-width: 250px;
@@ -704,6 +744,10 @@
             .welcome-section {
                 padding: 1.5rem 1rem;
                 width: 100%;
+            }
+            
+            #signup { /* Add specific margin-top for mobile signup section */
+                margin-top: 5rem; /* Pushes the signup section down */
             }
 
             .welcome-content {
@@ -908,7 +952,11 @@
 
 
     <div id="intro" style="position: fixed; inset: 0; background: black; z-index: 9999; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <iframe id="introAnimation" src="final.cyrcl.anim.seq.html" style="position: absolute; inset: 0; width: 100%; height: 100%; border: none;"></iframe>
+        <video id="introVideo" autoplay muted playsinline preload="auto" >
+            <source src="intro.mp4" type="video/mp4" media="(min-width: 769px)">
+            <source src="intromobile.mp4" type="video/mp4" media="(max-width: 768px)">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
 
@@ -945,7 +993,7 @@
             </div>
             <div class="nav-links-desktop hidden md:flex">
                 <a href="about_us.html">About Us</a>
-                <a href="#signup">Sign Up</a>
+                <a href="#signup" onclick="scrollToSignup()">Sign Up</a>
             </div>
             <button class="mobile-menu-button md:hidden">
                 &#9776;
@@ -953,7 +1001,7 @@
         </div>
         <div class="mobile-menu" id="mobileMenu">
             <a href="about_us.html">About Us</a>
-            <a href="#signup">Sign Up</a>
+            <a href="#signup" onclick="scrollToSignup()">Sign Up</a>
         </div>
     </nav>
 
@@ -962,7 +1010,7 @@
             <h1 class="hero-title gradient-text">Connect. Create. Cyrcl.</h1>
             <p class="hero-subtitle">The future of social interaction is here. Join Cyrcl and discover a new way to connect with your world.</p>
             <div class="hero-cta">
-                <button class="btn-gradient btn-hero-glow" onclick="scrollToSignup()">Get Started</button>
+                <button class="btn-gradient btn-hero-glow" href="https://www.apple.com/app-store/" target="_blank" >Get Started</button>
             </div>
         </section>
 
@@ -971,8 +1019,8 @@
                 </div>
             <div class="signup-form-container frosted-glass">
                 <div id="signupHeading">
-                    <h2 class="section-heading">Stay Updated</h2>
-                    <p class="section-subheading">Join our mailing list to be the first to know when Cyrcl launches.</p>
+                    <h2 class="section-heading">Join Us</h2>
+                    <p class="section-subheading">Enter your email address to join the Cyrcl community and start connecting today.</p>
                 </div>
                 <div id="loginHeading" style="display: none;">
                     <h2 class="section-heading">Delete Account</h2>
@@ -984,7 +1032,7 @@
                         <input type="email" id="signupEmail" name="signupEmail" placeholder="you@example.com" required>
                     </div>
                     <div class="flex justify-center">
-                        <button type="submit" class="btn-gradient">Subscribe for Updates</button>
+                        <button type="submit" class="btn-gradient">Log In</button>
                     </div>
                     <div class="signup-form-footer">
                         <p>Need to delete your account? <br><a href="#" onclick="event.preventDefault(); toggleForms('login');">Delete Account</a></p>
@@ -1000,7 +1048,7 @@
                         <button type="submit" class="btn-gradient">Delete Account</button>
                     </div>
                     <div class="signup-form-footer">
-                        <p>Changed your mind? <a href="#" onclick="event.preventDefault(); toggleForms('signup');">Stay Updated</a></p>
+                        <p>Changed your mind? <a href="#" onclick="event.preventDefault(); toggleForms('signup');">Sign In</a></p>
                     </div>
                 </form>
             </div>
@@ -1008,11 +1056,22 @@
             <!-- Welcome Section -->
     <div id="welcomeSection" class="welcome-section">
         <div class="welcome-content frosted-glass">
-            <h1 class="welcome-title">Thanks for Subscribing!</h1>
-            <p class="welcome-message">We'll keep you updated on our progress and let you know as soon as Cyrcl is ready for you to explore.</p>
-            <div class="welcome-contact">
-                <p>Have questions or feedback? We'd love to hear from you!</p>
-                <p>Contact: <a href="mailto:support@cyrcl.life" class="contact-link">support@cyrcl.life</a></p>
+            <!-- Sign Up Welcome Message -->
+            <div id="signupWelcome">
+                <h1 class="welcome-title">Welcome to Cyrcl!</h1>
+                <p class="welcome-message">We'll keep you updated on our progress and let you know as soon as Cyrcl is ready for you to explore.</p>
+                <div class="welcome-contact">
+                    <p>Have questions or feedback? We'd love to hear from you!</p>
+                    <p>Contact: <a href="mailto:support@cyrcl.life" class="contact-link">support@cyrcl.life</a></p>
+                </div>
+            </div>
+            <!-- Delete Account Welcome Message -->
+            <div id="deleteWelcome" style="display: none;">
+                <h1 class="welcome-title">Account Deletion Requested</h1>
+                <p class="welcome-message">We've received your request to delete your account. Our team will process this request within 48 hours.</p>
+                <div class="welcome-contact">
+                    <p>If you've changed your mind, <a href="#" onclick="event.preventDefault(); toggleForms('signup'); returnToSignup();" style="color: #00AFFF;">click here to register</a>.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1099,6 +1158,7 @@
 
         function handleFormSubmission(e) {
             e.preventDefault();
+            const isDeleteForm = e.target.id === 'loginForm';
             
             // Fade out both the form container and the headings
             gsap.to([signupFormContainer, '#signupHeading', '#loginHeading'], {
@@ -1111,8 +1171,41 @@
                     document.getElementById('loginHeading').style.display = 'none';
                     welcomeSection.style.display = 'block';
                     
+                    // Show appropriate welcome message
+                    if (isDeleteForm) {
+                        document.getElementById('signupWelcome').style.display = 'none';
+                        document.getElementById('deleteWelcome').style.display = 'block';
+                    } else {
+                        document.getElementById('signupWelcome').style.display = 'block';
+                        document.getElementById('deleteWelcome').style.display = 'none';
+                    }
+                    
                     // Fade in welcome section
                     gsap.to(welcomeSection, {
+                        opacity: 1,
+                        duration: 0.5,
+                        ease: "power2.inOut"
+                    });
+                }
+            });
+        }
+
+        function returnToSignup() {
+            // Fade out welcome section
+            gsap.to(welcomeSection, {
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    welcomeSection.style.display = 'none';
+                    signupFormContainer.style.display = 'block';
+                    document.getElementById('signupHeading').style.display = 'block';
+                    document.getElementById('loginHeading').style.display = 'none';
+                    document.getElementById('signupForm').style.display = 'block';
+                    document.getElementById('loginForm').style.display = 'none';
+                    
+                    // Fade in form container
+                    gsap.to([signupFormContainer, '#signupHeading'], {
                         opacity: 1,
                         duration: 0.5,
                         ease: "power2.inOut"
@@ -1293,6 +1386,47 @@ window.addEventListener('mousemove', (e) => {
     };
   </script>
   
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var introVideo = document.getElementById('introVideo');
+      var introDiv = document.getElementById('intro');
+      var mainContent = document.getElementById('mainContent');
+      if (introVideo) {
+        introVideo.addEventListener('ended', function() {
+          introDiv.style.opacity = 0;
+          setTimeout(function() {
+            introDiv.style.display = 'none';
+            if (mainContent) mainContent.style.opacity = 1;
+          }, 700); // Match the transition duration
+        });
+      }
+    });
+  </script>
+  
+  <script>
+    // Add this script to handle video source switching
+    document.addEventListener('DOMContentLoaded', function() {
+        const video = document.getElementById('introVideo');
+        const sources = video.getElementsByTagName('source');
+        
+        function updateVideoSource() {
+            const isMobile = window.innerWidth <= 768;
+            const currentSource = isMobile ? sources[1] : sources[0];
+            
+            if (video.currentSrc !== currentSource.src) {
+                video.src = currentSource.src;
+                video.load();
+                video.play();
+            }
+        }
+
+        // Initial check
+        updateVideoSource();
+
+        // Update on resize
+        window.addEventListener('resize', updateVideoSource);
+    });
+  </script>
   
 </body>
 </html>
