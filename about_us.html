@@ -41,6 +41,22 @@
             padding: 0 1.5rem;
             display: flex;
             align-items: center;
+            position: relative;
+            justify-content: space-between;
+        }
+
+        .back-arrow {
+            display: none;
+            color: #FFFFFF;
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+
+        .back-arrow img {
+            width: 24px;
+            height: 24px;
+            filter: invert(1);
+            opacity: 0.9;
         }
 
         .nav-logo {
@@ -87,27 +103,62 @@
             max-width: 100%;
         }
 
+        .header-pill {
+            display: inline-block;
+            padding: 0.25rem 1.5rem;
+            border-radius: 9999px;
+            background: #000000; /* Match body background for inside the pill */
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative; /* Needed for the pseudo-element */
+            z-index: 0;
+            margin-bottom: 1.5rem; /* Ensure consistent spacing below headers */
+        }
+
+        .header-pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px; /* Match the main element's border-radius */
+            padding: 2px; /* This creates the visible border */
+            background: linear-gradient(90deg, #FF0000 0%, #FF00F2 20%, #6166FF 56%, #71EF68 89%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1; /* Place behind the content */
+        }
+
         h1 {
-            font-size: 4.5rem !important;
+            font-size: 4.0rem !important;
             font-weight: 800;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0rem; /* Adjusted to remove default margin */
             color: #FFFFFF;
             letter-spacing: -0.03em;
+            text-align: center !important;
+            width: auto; /* Allow pill to wrap content */
+            max-width: none;
+            margin-left: -20px !important;
         }
 
         h2 {
             font-size: 2.5rem !important;
             font-weight: 600;
-            margin: 3rem 0 1rem;
+            margin: 3rem 0 0rem; /* Adjusted to remove default margin */
             color: #FFFFFF;
             letter-spacing: -0.01em;
+            text-align: center !important;
+            width: auto;
+            max-width: none;
         }
 
         h3 {
             font-size: 1.8rem !important;
             font-weight: 500;
-            margin: 1rem 0 1.5rem;
+            margin: 1rem 0 1.5rem; /* Adjusted to remove default margin */
             color: #FFFFFF;
+            text-align: left !important;
+            width: auto;
+            max-width: none;
         }
 
         p {
@@ -168,6 +219,25 @@
         .contact-info a {
             color: #00AFFF;
             text-decoration: none;
+            background: linear-gradient(
+                90deg,
+                #00AFFF 0%,
+                #00C3FF 25%,
+                #00AFFF 50%,
+                #00C3FF 75%,
+                #00AFFF 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% center;
+            }
         }
 
         .contact-info a:hover {
@@ -216,7 +286,163 @@
                 margin-top: 2rem;
                 padding-top: 1rem;
             }
+
+            .back-arrow {
+                display: block;
+            }
+            .nav-container {
+                justify-content: space-between;
+            }
         }
+
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.5rem !important;
+                margin-left: -10px !important;
+            }
+
+            h2 {
+                font-size: 1.8rem !important;
+            }
+
+            h3 {
+                font-size: 1.3rem !important;
+            }
+        }
+
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 2rem !important;
+                margin-left: -5px !important;
+            }
+
+            h2 {
+                font-size: 1.5rem !important;
+            }
+
+            h3 {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        /* Bottom Right Graphic Styles */
+        .bottom-right-graphic {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 399px; /* Base width from design */
+            height: 852px; /* Base height from design */
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .graphic-element {
+            position: absolute;
+            border-radius: 50%; /* Default for ellipses */
+            pointer-events: auto;
+        }
+
+        .graphic-ellipse-52 {
+            width: 459.53px;
+            height: 454.09px;
+            left: 94px;
+            top: 582px;
+            background-color: rgba(255, 255, 255, 0.05); /* Example background */
+        }
+
+        .graphic-ellipse-53 {
+            width: 345.57px;
+            height: 316.78px;
+            left: 155.66px;
+            top: 640.09px;
+            background-color: rgba(255, 255, 255, 0.03); /* Example background */
+        }
+
+        .graphic-ellipse-79 {
+            width: 463.17px;
+            height: 448.65px;
+            left: 94.48px;
+            top: 583.28px;
+            border: 56.7888px solid rgba(0, 0, 0, 0.43);
+            background-color: transparent;
+        }
+
+        .graphic-vector {
+            position: absolute;
+            background-color: #FFFFFF;
+        }
+
+        .graphic-vector-v1 {
+            left: 135.08px;
+            width: 29.28px;
+            top: 697.02px;
+            height: 31.62px;
+        }
+
+        .graphic-vector-v2 {
+            left: 237.04px;
+            width: 23.86px;
+            top: 628.74px;
+            height: 24.63px;
+            transform: scaleX(-1);
+        }
+
+        .graphic-vector-v3 {
+            left: 111.25px;
+            width: 29.28px;
+            top: 801.07px;
+            height: 29.31px;
+        }
+
+        .graphic-vector-v4 {
+            left: 146.79px;
+            width: 35.47px;
+            top: 901.44px;
+            height: 24.53px;
+        }
+
+        .graphic-vector-v5 {
+            left: 305.53px;
+            width: 38.35px;
+            top: 993.89px;
+            height: 24.63px;
+        }
+
+        .graphic-vector-v6 {
+            left: 217.61px;
+            width: 34.08px;
+            top: 961.34px;
+            height: 32.81px;
+        }
+
+        .graphic-ellipse-117 {
+            width: 103.06px;
+            height: 103.06px;
+            left: 309.35px;
+            top: 693.62px;
+            transform: rotate(58.97deg);
+            background-color: rgba(255, 255, 255, 0.08); /* Example background */
+        }
+
+        .graphic-vector-v7 {
+            left: 356.91px;
+            width: 21.03px;
+            top: 41.99px;
+            height: 22.99px;
+            background-color: #FFFFFF;
+        }
+
+        .graphic-vector-5 {
+            width: 23px;
+            height: 28px;
+            left: 312px;
+            top: 601px;
+            border: 1.5px solid #FFFFFF;
+            background-color: transparent; /* Assuming no fill */
+            border-radius: 0; /* Not an ellipse */
+        }
+
     </style>
 </head>
 <body>
@@ -226,16 +452,19 @@
                 <img src="cyrcllogo.png" alt="Cyrcl Logo">
                 <span class="nav-logo-text">Cyrcl</span>
             </a>
+            <a href="index.html" class="back-arrow">
+                <img src="back.png" alt="Back">
+            </a>
         </div>
     </nav>
 
     <div class="content-container">
-        <h1>Enter Cyrcl.</h1>
+        <h1 class="header-pill">Enter Cyrcl.</h1>
         <h3>Social connections should be genuine, simple, and truly fulfilling.</h3>
 
         <div class="divider"></div>
 
-        <h2>What is Cyrcl?</h2>
+        <h2 class="header-pill">What is Cyrcl?</h2>
         <p>Cyrcl is a social platform designed to facilitate in-person social interactions. The platform prioritizes user privacy and social well-being, aiming to streamline the process of organizing and maintaining real-world connections. Cyrcl focuses on enabling users to engage in offline activities and preserve shared memories.</p>
 
         <div class="contact-info">

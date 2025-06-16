@@ -158,7 +158,7 @@
         .hero-cta {
             position: relative;
             z-index: 20;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .hero-title {
@@ -176,7 +176,7 @@
             font-weight: 400;
             color: #ffffff;
             max-width: 600px;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
             line-height: 1.6;
             position: relative;
             z-index: 10;
@@ -460,6 +460,7 @@
             font-size: 0.875rem;
             font-weight: 500;
             margin-bottom: 0.5rem;
+            margin-left: 0.5rem !important;
         }
         .signup-form-container input {
             width: 100%;
@@ -488,14 +489,15 @@
             transition: all 0.3s ease-in-out;
             color: #FFFFFF;
             font-weight: bold;
-            font-size: 1.125rem;
-            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+            padding: 1rem 2rem;
             border-radius: 9999px;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            display: inline-block; /* Added to ensure proper button display */
-            min-width: 160px; /* Added to ensure minimum button width */
+            display: inline-block;
+            min-width: 180px;
+            max-width: 250px;
         }
 
         .btn-gradient::before {
@@ -692,7 +694,7 @@
                 font-size: 0.9rem; 
                 width: 100%;
                 padding: 0 1rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1rem;
                 line-height: 1.4;
             }
 
@@ -701,17 +703,18 @@
                 width: 100%;
             }
             .section-heading { 
-                font-size: 1.5rem; 
+                font-size: 1.75rem; 
                 width: 100%;
                 padding: 0 1rem;
-                margin-bottom: 0.75rem;
+                margin-bottom: 1rem;
+                margin-top: 1rem;
                 line-height: 1.3;
             }
             .section-subheading { 
-                font-size: 0.9rem; 
+                font-size: 0.8rem; 
                 width: 100%;
                 padding: 0 1rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1.2rem;
                 line-height: 1.4;
             }
 
@@ -724,6 +727,8 @@
             .signup-form-container label {
                 font-size: 0.8rem;
                 margin-bottom: 0.25rem;
+              
+
             }
 
             .signup-form-container input {
@@ -733,10 +738,10 @@
             }
 
             .btn-gradient { 
-                padding: 0.6rem 1rem; /* Reduced horizontal padding */
-                font-size: 0.9rem;
+                padding: 0.8rem 0.5rem; /* Adjusted for mobile */
+                font-size: 1rem; /* Adjusted for mobile */
                 width: 100%;
-                max-width: 250px;
+                max-width: 50px;
                 margin: 0 auto;
                 display: block;
             }
@@ -757,7 +762,7 @@
             }
 
             .welcome-title {
-                font-size: 1.2rem;
+                font-size: 0.75rem;
                 width: 100%;
                 padding: 0 1rem;
                 margin-bottom: 0.75rem;
@@ -766,11 +771,12 @@
             }
 
             .welcome-message {
-                font-size: 0.5rem;
+                font-size: 0.3rem;
                 width: 100%;
                 padding: 0 0.5rem;
                 margin-bottom: 1.5rem;
                 line-height: 1.4;
+                text-align: center;
             }
 
             .welcome-contact {
@@ -893,7 +899,7 @@
         }
 
         .welcome-title {
-            font-size: 2.5rem;
+            font-size: 2.0rem;
             font-weight: 700;
             color: #FFFFFF;
             margin-bottom: 1.5rem;
@@ -936,11 +942,12 @@
             }
             
             .welcome-title {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
             
             .welcome-message {
-                font-size: 1.1rem;
+                font-size: 0.75rem;
+                margin-bottom: -20px;
             }
         }
     </style>
@@ -993,7 +1000,8 @@
             </div>
             <div class="nav-links-desktop hidden md:flex">
                 <a href="about_us.html">About Us</a>
-                <a href="#signup" onclick="scrollToSignup()">Sign Up</a>
+                <a href="#signup" onclick="event.preventDefault(); toggleForms('signup'); scrollToSignup();">Get Updates</a>
+                <a href="#signup" onclick="event.preventDefault(); toggleForms('login'); scrollToSignup();">Clear Account</a>
             </div>
             <button class="mobile-menu-button md:hidden">
                 &#9776;
@@ -1001,7 +1009,8 @@
         </div>
         <div class="mobile-menu" id="mobileMenu">
             <a href="about_us.html">About Us</a>
-            <a href="#signup" onclick="scrollToSignup()">Sign Up</a>
+            <a href="#signup" onclick="event.preventDefault(); toggleForms('signup'); scrollToSignup();">Get Updates</a>
+            <a href="#signup" onclick="event.preventDefault(); toggleForms('login'); scrollToSignup();">Clear Account</a>
         </div>
     </nav>
 
@@ -1019,12 +1028,12 @@
                 </div>
             <div class="signup-form-container frosted-glass">
                 <div id="signupHeading">
-                    <h2 class="section-heading">Join Us</h2>
-                    <p class="section-subheading">Enter your email address to join the Cyrcl community and start connecting today.</p>
+                    <h2 class="section-heading">Stay Updated</h2>
+                    <p class="section-subheading">Enter your email to receive updates about Cyrcl's launch and early access opportunities.</p>
                 </div>
                 <div id="loginHeading" style="display: none;">
                     <h2 class="section-heading">Delete Account</h2>
-                    <p class="section-subheading">We're sorry to see you go. Please confirm your email to delete your account.</p>
+                    <p class="section-subheading">We're sorry to see you go. Please confirm your email to clear your account data.</p>
                 </div>
                 <form id="signupForm" class="space-y-4" onsubmit="event.preventDefault(); console.log('Email submission attempt');">
                     <div>
@@ -1032,7 +1041,7 @@
                         <input type="email" id="signupEmail" name="signupEmail" placeholder="you@example.com" required>
                     </div>
                     <div class="flex justify-center">
-                        <button type="submit" class="btn-gradient">Log In</button>
+                        <button type="submit" class="btn-gradient">Submit</button>
                     </div>
                     <div class="signup-form-footer">
                         <p>Need to delete your account? <br><a href="#" onclick="event.preventDefault(); toggleForms('login');">Delete Account</a></p>
@@ -1047,9 +1056,7 @@
                     <div class="flex justify-center">
                         <button type="submit" class="btn-gradient">Delete Account</button>
                     </div>
-                    <div class="signup-form-footer">
-                        <p>Changed your mind? <a href="#" onclick="event.preventDefault(); toggleForms('signup');">Sign In</a></p>
-                    </div>
+                    
                 </form>
             </div>
 
@@ -1069,9 +1076,7 @@
             <div id="deleteWelcome" style="display: none;">
                 <h1 class="welcome-title">Account Deletion Requested</h1>
                 <p class="welcome-message">We've received your request to delete your account. Our team will process this request within 48 hours.</p>
-                <div class="welcome-contact">
-                    <p>If you've changed your mind, <a href="#" onclick="event.preventDefault(); toggleForms('signup'); returnToSignup();" style="color: #00AFFF;">click here to register</a>.</p>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -1275,8 +1280,8 @@
       duration: 1.2, 
       delay: 0.6, 
       scale: 0.8, 
-      opacity: 0, 
-      ease: "back.out(1.7)";
+      opacity: 1, 
+    
       
     });
 
