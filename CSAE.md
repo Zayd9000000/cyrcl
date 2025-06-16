@@ -1,48 +1,86 @@
-Cyrcl Policy on Child Sexual Abuse and Exploitation (CSAE)
-Effective: 20th January 2025
+Child Sexual Abuse & Exploitation (CSAE) Policy
+Last updated: January 5, 2025
+Cyrcl is committed to maintaining a safe, respectful, and protective environment for all users. This document outlines our unwavering stance against Child Sexual Abuse and Exploitation (CSAE), which includes the creation, circulation, or facilitation of Child Sexual Abuse Material (CSAM). Any breach of this policy will result in immediate action.
 
-1. Purpose
-Cyrcl is committed to creating a safe and respectful online environment. We have zero tolerance for child sexual abuse and exploitation (CSAE). This policy outlines the standards, protocols, and enforcement mechanisms in place to prevent, detect, and respond to CSAE-related content and behavior on our platform.
-
-2. Scope
-This policy applies to all users, content, and activities on Cyrcl, including but not limited to text, images, videos, messages, live interactions, and metadata. It also applies to third-party integrations and partners operating within the Cyrcl ecosystem.
-
-3. Prohibited Conduct
-The following are strictly prohibited and will result in immediate action, including account suspension, content removal, and reporting to appropriate authorities:
-
-- Uploading, sharing, or accessing content that depicts or promotes CSAE.
-
-- Grooming, solicitation, or any communication aimed at the exploitation of minors.
-
-- Possession or dissemination of known or suspected child sexual abuse material (CSAM).
-
-- Impersonation of a minor or misrepresentation of age to engage in predatory behavior.
-
-- Use of Cyrcl to facilitate trafficking, coercion, or commercial sexual exploitation of children.
+What is CSAE and CSAM
+Child Sexual Abuse and Exploitation (CSAE) refers to any act that harms, exploits, or endangers minors through sexual means. This includes, but is not limited to:
+Grooming minors for sexual purposes
 
 
-4. Reporting Mechanisms
-Users can report suspected CSAE activity using in-app tools or by emailing support@cyrcl.app. All reports are treated with urgency and confidentiality. Cyrcl will cooperate fully with law enforcement and child protection agencies in all relevant jurisdictions.
+Sextortion of a child (e.g., using threats or blackmail to solicit sexual content from minors)
 
-5. Response and Enforcement
-Upon detection or credible report:
 
-Content will be immediately removed.
+Child sex trafficking and its facilitation
 
-User accounts involved will be suspended or permanently banned.
 
-Relevant information will be reported to the National Center for Missing & Exploited Children (NCMEC) or equivalent legal authorities.
+Any attempt to sexualize or endanger a child online or offline
 
-Internal audit and escalation protocols will be activated to prevent recurrence.
 
-6. Collaboration and Transparency
-Cyrcl partners with child safety organizations and regulatory bodies to stay current on best practices and contribute to global efforts against CSAE. We publish transparency reports semiannually to disclose enforcement statistics and policy updates.
+Child Sexual Abuse Material (CSAM) includes any image, video, illustration, animation, or digitally created content that depicts minors involved in sexually explicit acts. Possession, sharing, or production of CSAM is illegal and condemned globally.
+Cyrcl explicitly prohibits all content and conduct that sexualizes or exploits children in any form.
 
-7. Education and Prevention
-We provide educational resources to users, parents, and guardians on digital safety, recognizing grooming behavior, and supporting vulnerable populations.
+Our Zero-Tolerance Policy
+Cyrcl enforces a strict and non-negotiable zero-tolerance policy regarding CSAE and CSAM:
+Accounts associated with CSAE or CSAM will be immediately deactivated or banned
 
-8. Accountability
-This policy is overseen by the Trust & Safety Division at Cyrcl. Failure by staff, contractors, or partners to uphold these standards may result in disciplinary action or termination of contracts.
 
-Contact for Concerns or Clarifications
-Email: support@cyrcl.app
+Offending content will be removed without warning
+
+
+We will report incidents to the appropriate authorities, including the National Center for Missing & Exploited Children (NCMEC) or equivalent global agencies
+
+
+We fully cooperate with law enforcement in accordance with applicable legal frameworks
+
+
+There are no exceptions to this policy.
+
+Reporting Abuse on Cyrcl
+If you come across any behavior, messages, or media on Cyrcl that you believe involves CSAE or CSAM:
+Report it directly through the app via our in-app reporting feature, or
+Email us at: support@cyrcl.life
+All reports are kept confidential and are reviewed immediately by our dedicated Trust & Safety team.
+
+Enforcement and Compliance
+To comply with international child protection standards and Google Play’s CSAE policy requirements:
+This CSAE policy is publicly posted at: https://www.cyrcl.life/child-safety-policy
+
+
+The policy references both CSAE and CSAM, and identifies Cyrcl app and developer by name as it appears on the Google Play listing
+
+
+This policy is accessible from our app listing, Terms of Service, and website
+
+
+We regularly evaluate and refine our safety policies to align with evolving best practices
+
+
+
+Safety Through Transparency
+Cyrcl collaborates with child safety professionals, nonprofit organizations, and relevant legal entities to:
+Monitor emerging risks to minors
+
+
+Strengthen detection and response systems
+
+
+Train our moderation and engineering teams in safety protocols
+
+
+We believe in collective responsibility to keep digital spaces safe, especially for the most vulnerable.
+
+Contact & Reference
+Developer Name (Google Play): Cyrcl
+
+
+App Name (Google Play): Cyrcl
+
+
+Policy Link: https://www.cyrcl.com/child-safety-policy
+
+
+Trust & Safety Contact: support@cyrcl.com
+
+
+If you have questions about this policy or would like additional guidance, please contact our Trust & Safety team.
+
