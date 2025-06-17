@@ -1298,9 +1298,12 @@
 
   gsap.from(".signup-form-container", {
     scrollTrigger: {
-      trigger: ".signup-form-container",
-      start: "top 80%",
-      toggleActions: "play none none none"
+        trigger: ".signup-form-container",
+        start: "top 80%",
+        toggleActions: "play none none none",
+        markers: false,
+        fastScrollEnd: true,
+        preventOverlaps: true
     },
     duration: 1.2,
     y: 60,
